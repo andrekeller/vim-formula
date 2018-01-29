@@ -1,0 +1,45 @@
+set background=dark
+set backspace=2
+set colorcolumn=80
+set expandtab
+set history=1000
+set hlsearch
+set incsearch
+set laststatus=2
+set nobackup
+set nocompatible
+set nofoldenable
+set numberwidth=5
+set pastetoggle=<F2>
+set ruler
+set shiftwidth=4
+set showmatch
+set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\ [%c%V\ %l/%L\ (%p%%)]
+set t_Co=256
+set tabstop=4
+set undolevels=1000
+syn on
+
+cmap w!! w !sudo tee % >/dev/null
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+noremap <C-left> :bprev<CR>                                                     
+noremap <C-right> :bnext<CR>
+vnoremap < <gv
+vnoremap > >gv
+
+let mapleader = ","
+nnoremap <Leader>Q :qall<CR>
+nnoremap <Leader>e :wq<CR>
+nnoremap <Leader>q :quit<CR>
+nnoremap <Leader>rm :call delete(expand('%')) \| bdelete!<CR>
+nnoremap <Leader>w :w<CR>
+vnoremap <Leader>s :sort<CR>
+
+autocmd FileType make setlocal noexpandtab                                      
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+fun! s:highlight()
+    highlight ColorColumn ctermbg=235
+endfun
+call s:highlight()
+autocmd ColorScheme * call s:highlight()
